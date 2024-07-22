@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductoForm from './ProductoForm';
-import ProductoList from './ProductoList.js';
+import ProductoList from './ProductoList';
 
 const ProductoCRUD = () => {
   const [productos, setProductos] = useState([]);
@@ -49,19 +49,19 @@ const ProductoCRUD = () => {
         </li>
       </ul>
       <div className="tab-content">
-        <div className="tab-pane active" id="agregar">
+        <div className="tab-pane fade show active" id="agregar">
           <h2>Agregar Producto</h2>
           <ProductoForm onSubmit={agregarProducto} />
         </div>
-        <div className="tab-pane" id="listar">
+        <div className="tab-pane fade" id="listar">
           <h2>Listar Productos</h2>
           <ProductoList productos={productos} />
         </div>
-        <div className="tab-pane" id="modificar">
+        <div className="tab-pane fade" id="modificar">
           <h2>Modificar Producto</h2>
           <ProductoForm onSubmit={modificarProducto} productos={productos} />
         </div>
-        <div className="tab-pane" id="eliminar">
+        <div className="tab-pane fade" id="eliminar">
           <h2>Eliminar Producto</h2>
           <ProductoForm onSubmit={eliminarProducto} productos={productos} eliminar />
         </div>
