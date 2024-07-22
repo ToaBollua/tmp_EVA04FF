@@ -47,7 +47,7 @@ const ProductoCRUD = () => {
       </Tab>
       <Tab eventKey="modificar" title="Modificar Producto">
         <h2>Modificar Producto</h2>
-        <ProductoForm onSubmit={modificarProducto} productos={productos} />
+        <ProductoForm onSubmit={modificarProducto} productos={productos} modificar />
       </Tab>
       <Tab eventKey="eliminar" title="Eliminar Producto">
         <h2>Eliminar Producto</h2>
