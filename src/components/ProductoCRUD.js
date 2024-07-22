@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ProductoForm from './ProductoForm';
 import ProductoList from './ProductoList';
+import { Tabs, Tab } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProductoCRUD = () => {
   const [productos, setProductos] = useState([]);
+  const [key, setKey] = useState('agregar');
 
   useEffect(() => {
     const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
@@ -33,40 +36,24 @@ const ProductoCRUD = () => {
   };
 
   return (
-    <div>
-      <ul className="nav nav-tabs">
-        <li className="nav-item">
-          <a className="nav-link active" data-toggle="tab" href="#agregar">Agregar Producto</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" data-toggle="tab" href="#listar">Listar Productos</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" data-toggle="tab" href="#modificar">Modificar Producto</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" data-toggle="tab" href="#eliminar">Eliminar Producto</a>
-        </li>
-      </ul>
-      <div className="tab-content">
-        <div className="tab-pane fade show active" id="agregar">
-          <h2>Agregar Producto</h2>
-          <ProductoForm onSubmit={agregarProducto} />
-        </div>
-        <div className="tab-pane fade" id="listar">
-          <h2>Listar Productos</h2>
-          <ProductoList productos={productos} />
-        </div>
-        <div className="tab-pane fade" id="modificar">
-          <h2>Modificar Producto</h2>
-          <ProductoForm onSubmit={modificarProducto} productos={productos} />
-        </div>
-        <div className="tab-pane fade" id="eliminar">
-          <h2>Eliminar Producto</h2>
-          <ProductoForm onSubmit={eliminarProducto} productos={productos} eliminar />
-        </div>
-      </div>
-    </div>
+    <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+      <Tab eventKey="agregar" title="Agregar Producto">
+        <h2>Agregar Producto</h2>
+        <ProductoForm onSubmit={agregarProducto} />
+      </Tab>
+      <Tab eventKey="listar" title="Listar Productos">
+        <h2>Listar Productos</h2>
+        <ProductoList productos={productos} />
+      </Tab>
+      <Tab eventKey="modificar" title="Modificar Producto">
+        <h2>Modificar Producto</h2>
+        <ProductoForm onSubmit={modificarProducto} productos={productos} />
+      </Tab>
+      <Tab eventKey="eliminar" title="Eliminar Producto">
+        <h2>Eliminar Producto</h2>
+        <ProductoForm onSubmit={eliminarProducto} productos={productos} eliminar />
+      </Tab>
+    </Tabs>
   );
 };
 
