@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 document.addEventListener('DOMContentLoaded', function () {
   const formAgregar = document.getElementById('formAgregar');
   const formModificar = document.getElementById('formModificar');
