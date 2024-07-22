@@ -1,26 +1,64 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #121212;
+    color: #ffffff;
     font-family: Arial, sans-serif;
-}
-
-h1, h2 {
-    color: #343a40;
-}
-
-.nav-tabs .nav-link {
-    color: #495057;
-}
-
-.nav-tabs .nav-link.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.table th, .table td {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
+  }
+  
+  .container {
+    margin: 20px;
+  }
+  
+  h1, h2, h3 {
+    color: #4caf50;
+  }
+  
+  .nav-tabs .nav-link.active {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  .btn-primary {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  .btn-primary:hover {
+    background-color: #388e3c;
+    border-color: #388e3c;
+  }
+  
+  .form-control {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #4caf50;
+  }
+  
+  .form-control:focus {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border-color: #4caf50;
+    box-shadow: none;
+  }
+  
+  .table {
+    color: #ffffff;
+  }
+  
+  .table thead th {
+    background-color: #4caf50;
+    color: #ffffff;
+  }
+  
+  .table tbody tr:nth-child(odd) {
+    background-color: #1e1e1e;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #2c2c2c;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #4caf50;
+    color: #ffffff;
+  }
+  

@@ -47,7 +47,7 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
   };
 
   return (
-    <form onSubmit={eliminar || modificar ? (e) => { e.preventDefault(); buscarCoincidencias(); } : handleSubmit}>
+    <form onSubmit={eliminar || modificar ? (e) => { e.preventDefault(); buscarCoincidencias(); } : handleSubmit} className="container">
       {eliminar || modificar ? (
         <>
           <div className="form-group">
