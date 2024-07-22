@@ -5,6 +5,7 @@ const ProductoForm = ({ onSubmit, productos, eliminar }) => {
   const [nombre, setNombre] = useState('');
   const [precio, setPrecio] = useState('');
   const [cantidad, setCantidad] = useState('');
+  const [coincidencias, setCoincidencias] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,29 +17,48 @@ const ProductoForm = ({ onSubmit, productos, eliminar }) => {
     setCantidad('');
   };
 
-  const handleEliminar = (e) => {
-    e.preventDefault();
-    onSubmit(id);
-    setId('');
+  const buscarCoincidencias = () => {
+    const productosCoincidentes = productos.filter(producto => producto.nombre.toLowerCase() === nombre.toLowerCase());
+    setCoincidencias(productosCoincidentes);
+  };
+
+  const handleEliminar = (productoId) => {
+    onSubmit(productoId);
+    setCoincidencias(coincidencias.filter(producto => producto.id !== productoId));
   };
 
   return (
-    <form onSubmit={eliminar ? handleEliminar : handleSubmit}>
+    <form onSubmit={eliminar ? (e) => { e.preventDefault(); buscarCoincidencias(); } : handleSubmit}>
       {eliminar ? (
         <>
           <div className="form-group">
-            <label>ID del Producto:</label>
+            <label>Nombre del Producto:</label>
             <input
-              type="number"
+              type="text"
               className="form-control"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
               required
             />
           </div>
           <button type="submit" className="btn btn-danger">
-            Eliminar
+            Buscar
           </button>
+          {coincidencias.length > 0 && (
+            <div>
+              <h3>Productos Encontrados:</h3>
+              <ul>
+                {coincidencias.map(producto => (
+                  <li key={producto.id}>
+                    {producto.nombre} - Precio: {producto.precio} - Cantidad: {producto.cantidad}
+                    <button onClick={() => handleEliminar(producto.id)} className="btn btn-danger btn-sm ml-2">
+                      Eliminar
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </>
       ) : (
         <>
