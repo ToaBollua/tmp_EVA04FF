@@ -37,7 +37,7 @@ Para comenzar a usar la aplicación, sigue estos pasos:
 1. **Clona el repositorio**:
 
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone <https://github.com/ToaBollua/tmp_EVA04FF.git>
 
 2. **Instala las dependencias**:
 
