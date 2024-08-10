@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
 
-const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
+const DataForm = ({ onSubmit, datos, eliminar, modificar }) => {
   const [id, setId] = useState('');
   const [nombre, setNombre] = useState('');
-  const [precio, setPrecio] = useState('');
-  const [cantidad, setCantidad] = useState('');
+  const [valor, setValor] = useState('');
   const [coincidencias, setCoincidencias] = useState([]);
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  const [datoSeleccionado, setDatoSeleccionado] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const nuevoProducto = { id: id || Date.now(), nombre, precio, cantidad };
-    onSubmit(nuevoProducto);
+    const nuevoDato = { id: id || Date.now(), nombre, valor };
+    onSubmit(nuevoDato);
     setId('');
     setNombre('');
-    setPrecio('');
-    setCantidad('');
+    setValor('');
   };
 
   const buscarCoincidencias = () => {
-    const productosCoincidentes = productos.filter(producto => producto.nombre.toLowerCase() === nombre.toLowerCase());
-    setCoincidencias(productosCoincidentes);
+    const datosCoincidentes = datos.filter(dato => dato.nombre.toLowerCase() === nombre.toLowerCase());
+    setCoincidencias(datosCoincidentes);
   };
 
-  const handleModificar = (producto) => {
-    setId(producto.id);
-    setNombre(producto.nombre);
-    setPrecio(producto.precio);
-    setCantidad(producto.cantidad);
-    setProductoSeleccionado(producto);
+  const handleModificar = (dato) => {
+    setId(dato.id);
+    setNombre(dato.nombre);
+    setValor(dato.valor);
+    setDatoSeleccionado(dato);
   };
 
   const confirmarModificar = () => {
-    onSubmit({ id: productoSeleccionado.id, nombre, precio, cantidad });
+    onSubmit({ id: datoSeleccionado.id, nombre, valor });
     setId('');
     setNombre('');
-    setPrecio('');
-    setCantidad('');
+    setValor('');
     setCoincidencias([]);
-    setProductoSeleccionado(null);
+    setDatoSeleccionado(null);
   };
 
-  const handleEliminar = (productoId) => {
-    onSubmit(productoId);
-    setCoincidencias(coincidencias.filter(producto => producto.id !== productoId));
+  const handleEliminar = (datoId) => {
+    onSubmit(datoId);
+    setCoincidencias(coincidencias.filter(dato => dato.id !== datoId));
   };
 
   return (
@@ -51,7 +47,7 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
       {eliminar || modificar ? (
         <>
           <div className="form-group">
-            <label>Nombre del Producto:</label>
+            <label>Nombre del Dato:</label>
             <input
               type="text"
               className="form-control"
@@ -65,17 +61,17 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
           </button>
           {coincidencias.length > 0 && (
             <div>
-              <h3>Productos Encontrados:</h3>
+              <h3>Datos Encontrados:</h3>
               <ul>
-                {coincidencias.map(producto => (
-                  <li key={producto.id}>
-                    {producto.nombre} - Precio: {producto.precio} - Cantidad: {producto.cantidad}
+                {coincidencias.map(dato => (
+                  <li key={dato.id}>
+                    {dato.nombre} - Valor: {dato.valor}
                     {modificar ? (
-                      <button onClick={() => handleModificar(producto)} className="btn btn-warning btn-sm ml-2">
+                      <button onClick={() => handleModificar(dato)} className="btn btn-warning btn-sm ml-2">
                         Modificar
                       </button>
                     ) : (
-                      <button onClick={() => handleEliminar(producto.id)} className="btn btn-danger btn-sm ml-2">
+                      <button onClick={() => handleEliminar(dato.id)} className="btn btn-danger btn-sm ml-2">
                         Eliminar
                       </button>
                     )}
@@ -84,9 +80,9 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
               </ul>
             </div>
           )}
-          {modificar && productoSeleccionado && (
+          {modificar && datoSeleccionado && (
             <div>
-              <h3>Modificar Producto</h3>
+              <h3>Modificar Dato</h3>
               <div className="form-group">
                 <label>Nombre:</label>
                 <input
@@ -98,22 +94,12 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
                 />
               </div>
               <div className="form-group">
-                <label>Precio:</label>
+                <label>Valor:</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
-                  value={precio}
-                  onChange={(e) => setPrecio(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label>Cantidad:</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={cantidad}
-                  onChange={(e) => setCantidad(e.target.value)}
+                  value={valor}
+                  onChange={(e) => setValor(e.target.value)}
                   required
                 />
               </div>
@@ -136,22 +122,12 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
             />
           </div>
           <div className="form-group">
-            <label>Precio:</label>
+            <label>Valor:</label>
             <input
-              type="number"
+              type="text"
               className="form-control"
-              value={precio}
-              onChange={(e) => setPrecio(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Cantidad:</label>
-            <input
-              type="number"
-              className="form-control"
-              value={cantidad}
-              onChange={(e) => setCantidad(e.target.value)}
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
               required
             />
           </div>
@@ -164,4 +140,4 @@ const ProductoForm = ({ onSubmit, productos, eliminar, modificar }) => {
   );
 };
 
-export default ProductoForm;
+export default DataForm;
